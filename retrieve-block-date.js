@@ -15,6 +15,7 @@ async function retrieveBlockDate(height) {
       const block = await client.getBlock(blockHash);
       return block.time;
     }
+    return undefined;
   } catch (error) {}
 }
 
