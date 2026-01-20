@@ -10,6 +10,7 @@ const client = new BitcoinCore({
 async function retrieveTransactionValue(hash) {
     try {
         const tran = await client.getTransactionByHash(hash)
+        console.log(tran)
         return tran.amount
     } catch(e) {
 
