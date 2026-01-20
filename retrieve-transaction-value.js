@@ -10,7 +10,7 @@ const client = new BitcoinCore({
 async function retrieveTransactionValue(hash) {
     try {
        const tran = await client.getTransactionByHash(hash)
-       let res;
+       let res = 0;
        for (const v of tran.vout) {
         res += v.value
        }
