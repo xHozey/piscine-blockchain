@@ -11,8 +11,8 @@ async function retrieveTransactionValue(hash) {
     try {
        const tran = await client.getTransactionByHash(hash)
        let res;
-       for (let a in tran.vout) {
-        res += a.value
+       for (const v of tran.vout) {
+        res += v.value
        }
        return res
     } catch(e) {
