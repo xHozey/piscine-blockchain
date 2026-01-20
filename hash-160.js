@@ -6,5 +6,3 @@ const hash160 = (str) => {
   let ripemd160_hash = crypto.hash('ripemd160', sha256_bin)
   return Buffer.from(ripemd160_hash, 'hex')
 }
-
-console.log(hash160('Ducks'))
