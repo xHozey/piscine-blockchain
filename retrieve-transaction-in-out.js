@@ -28,3 +28,5 @@ async function retrieveTransactionInOut(hash) {
 
     }
 }
+
+module.exports = {retrieveTransactionInOut}
