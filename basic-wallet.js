@@ -18,11 +18,11 @@ let address = generateAddress();
 
 const createTransaction = (amount, recipient) => {
   let privateKey = fs.readFileSync("wallet.pem");
-  let amountHex = amount.toString(16)
-  let sign = crypto.createSign('sha256')
-  let tx = address + recipient + amountHex
-  sign.write(tx)
-  sign.end()
-  const signature = sign.sign(privateKey, 'hex')
-  return  tx + signature
+  let amountHex = amount.toString(16);
+  let sign = crypto.createSign("sha256");
+  let tx = address + recipient + amountHex;
+  sign.write(tx);
+  sign.end();
+  const signature = sign.sign(privateKey, "hex");
+  return tx + signature;
 };
