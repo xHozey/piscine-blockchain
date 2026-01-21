@@ -2,14 +2,14 @@
 
 pragma solidity ^0.8.4;
 
-public contract BuyTickets {
+contract BuyTickets {
     mapping(address => uint) ticketsBought;
     function buyTicket() public payable {
         require(msg.value >= 0.1 ether, "You must pay more than 0.1ETH");
         ticketsBought[msg.sender] += 1;
     }
 
-    function ticketsOf(address wallet) public view returns(uint) {
+    function ticketsOf(address wallet) public view returns (uint) {
         return ticketsBought[wallet];
     }
 }
@@ -25,6 +25,9 @@ contract FunAndProfit is BuyTickets {
 
     function getBenefits() public {
         require(msg.sender == organizer, "You must be the organizer");
-        payable(organizer).transfer(address(this).balance);
+        (bool sent, ) = payable(organizer).call{value: address(this).balance}(
+            ""
+        );
+        require(sent, "Failed to send ETH");
     }
 }
