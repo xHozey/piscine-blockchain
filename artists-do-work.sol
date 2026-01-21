@@ -5,6 +5,8 @@ pragma solidity ^0.8.4;
 contract ArtistsDoWork {
     mapping(address => uint) ticketsBought;
     mapping(address => bool) artists;
+    mapping(address => bool) redeemed;
+
     address organizer;
 
     constructor() {
@@ -22,18 +24,15 @@ contract ArtistsDoWork {
     }
 
     function addRemuneratedArtist(address addr) public onlyOrganizer {
-        artists[addr] = false;
+        artists[addr] = true;
     }
 
     function getPayed() public {
         require(address(this).balance > 1 ether, "no enought ether");
-        require(artists[msg.sender] == false || artists[msg.sender] == true, "You are not a registered artist");
-        require(
-            !artists[msg.sender],
-            "You must be an artist and didnt redeem ether yet"
-        );
+        require(artists[msg.sender], "artists must be registerd");
+        require(!redeemed[msg.sender], "already redeemed");
         (bool sent, ) = payable(msg.sender).call{value: 1 ether}("");
         require(sent, "Failed to send ETH");
-        artists[msg.sender] = true;
+        redeemed[msg.sender] = true;
     }
 }
