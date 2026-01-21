@@ -6,7 +6,7 @@ const semiBrute = (hex) => {
     let possibility = i.toString()
     let hash = crypto.hash('sha256', possibility)
     if (hash.startsWith(hex)) {
-      return i
+      return i.toString()
     }
     i++
   }
