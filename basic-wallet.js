@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const fs = require("fs");
+
 const generateAddress = () => {
   const { privateKey, publicKey } = crypto.generateKeyPairSync("ec", {
     namedCurve: "secp256k1",
