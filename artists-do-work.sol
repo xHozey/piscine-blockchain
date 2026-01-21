@@ -26,12 +26,12 @@ contract ArtistsDoWork {
     }
 
     function getPayed() public {
-        require(address(this).balance > 0.1 ether, "no enought ether");
+        require(address(this).balance > 1 ether, "no enought ether");
         require(
             !artists[msg.sender],
             "You must be an artist and didnt redeem ether yet"
         );
-        (bool sent, ) = payable(msg.sender).call{value: 0.1 ether}("");
+        (bool sent, ) = payable(msg.sender).call{value: 1 ether}("");
         require(sent, "Failed to send ETH");
     }
 }
