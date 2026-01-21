@@ -13,6 +13,8 @@ const generateAddress = () => {
   return "01" + crypto.hash("sha256", publicKeyDer);
 };
 
+let address = generateAddress()
+
 const createTransaction = (amount, recipient) => {
   let privateKey = fs
     .readFileSync("wallet.pem")
