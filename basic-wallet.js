@@ -14,13 +14,13 @@ const generateAddress = () => {
   return "01" + crypto.hash("sha256", publicKeyDer, "hex");
 };
 
-let address = generateAddress();
+let addr = generateAddress();
 
 const createTransaction = (amount, recipient) => {
   let privateKey = fs.readFileSync("wallet.pem");
   let amountHex = amount.toString(16);
   let sign = crypto.createSign("sha256");
-  let tx = address + recipient + amountHex;
+  let tx = addr + recipient + amountHex;
   sign.write(tx);
   sign.end();
   const signature = sign.sign(privateKey, "hex");
