@@ -1,9 +1,19 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.4;
-import "./buy-tickets.sol";
 
-contract FunAndProfit is BuyTicket {
+public contract BuyTickets {
+    mapping(address => uint) ticketsBought;
+    function buyTicket() public payable {
+        require(msg.value >= 0.1 ether, "You must pay more than 0.1ETH");
+        ticketsBought[msg.sender] += 1;
+    }
+
+    function ticketsOf(address wallet) public view returns(uint) {
+        return ticketsBought[wallet];
+    }
+}
+contract FunAndProfit is BuyTickets {
     address organizer;
     constructor() {
         organizer = msg.sender;
