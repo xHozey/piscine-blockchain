@@ -11,11 +11,11 @@ const generateAddress = () => {
   const publicKeyDer = crypto
     .createPublicKey(publicKey)
     .export({ type: "spki", format: "der" });
-  return "01" + crypto.hash("sha256", publicKeyDer, "hex");
+  return "01" + crypto.createHash("sha256").update(publicKeyDer).digest('hex');
 };
 
 let addr = generateAddress();
-
+console.log(addr.length);
 const createTransaction = (amount, recipient) => {
   let privateKey = fs.readFileSync("wallet.pem");
   let amountHex = amount.toString(16);
