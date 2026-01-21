@@ -10,19 +10,18 @@ const generateAddress = () => {
   const publicKeyDer = crypto
     .createPublicKey(publicKey)
     .export({ type: "spki", format: "der" });
-  return "01" + crypto.hash("sha256", publicKeyDer);
+  return "01" + crypto.hash("sha256", publicKeyDer, "hex");
 };
 
-let address = generateAddress()
+let address = generateAddress();
 
 const createTransaction = (amount, recipient) => {
-  let privateKey = fs
-    .readFileSync("wallet.pem")
-    .toString()
-    .replace(/-----BEGIN PRIVATE KEY-----/, "")
-    .replace(/-----END PRIVATE KEY-----/, "")
-    .replace(/\s+/g, "");
-
-  return address + recipient + amount.toString(16) + privateKey;
+  let privateKey = fs.readFileSync("wallet.pem");
+  let amountHex = amount.toString(16)
+  let sign = crypto.createSign('sha256')
+  let tx = address + recipient + amountHex
+  sign.write(tx)
+  sign.end()
+  const signature = sign.sign(privateKey, 'hex')
+  return  tx + signature
 };
-
