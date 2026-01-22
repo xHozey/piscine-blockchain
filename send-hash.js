@@ -10,7 +10,6 @@ const sendHash = async (text) => {
   const receiver = await provider.getSigner(1).getAddress();
   const tx = {
     to: receiver,
-    value: 0,
     data: "0x"+hashedText,
   };
   const txRes = await signer.sendTransaction(tx);
