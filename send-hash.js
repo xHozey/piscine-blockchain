@@ -1,6 +1,7 @@
 const ethers = require("ethers");
 const crypto = require("crypto");
 const { hexlify } = require("ethers/lib/utils");
+
 const sendHash = async (text) => {
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
@@ -11,7 +12,7 @@ const sendHash = async (text) => {
   const tx = {
     to: receiver,
     value: 0,
-    data: hexlify(hashedText),
+    data: hexlify("0x" + hashedText),
   };
   const txRes = await signer.sendTransaction(tx);
   txRes.wait();
