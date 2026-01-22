@@ -15,7 +15,7 @@ const sendHash = async (text) => {
   };
   const txRes = await signer.sendTransaction(tx);
   await txRes.wait();
-  return txRes
+  return txRes.hash
 };
 
 module.exports = sendHash;
