@@ -7,14 +7,13 @@ const sendHash = async (text) => {
   );
   const hashedText = crypto.createHash("sha256").update(text).digest("hex");
   const signer = provider.getSigner(0);
-  const receiver = await provider.getSigner(0).getAddress();
+  const receiver = await provider.getSigner(1).getAddress();
   const tx = {
     to: receiver,
     value: 0,
     data: "0x" + hashedText,
   };
   const txRes = await signer.sendTransaction(tx);
-  txRes.wait();
-  console.log(txRes)
+  await txRes.wait();
 };
 module.exports = sendHash;
