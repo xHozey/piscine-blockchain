@@ -5,7 +5,7 @@ const sendEther = async (amount, address) => {
     const tx = {
         from: await provider.listAccounts()[0],
         to: address,
-        value: ethers.utils.parseEther(amount)
+        value: amount
     }
     const txRes = await provider.sendTransaction(tx)
     txRes.wait()
