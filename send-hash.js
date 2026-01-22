@@ -17,4 +17,5 @@ const sendHash = async (text) => {
   await txRes.wait();
   return txRes
 };
+
 module.exports = sendHash;
