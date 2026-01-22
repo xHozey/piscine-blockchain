@@ -2,13 +2,18 @@ const ethers = require('ethers')
 
 const sendEther = async (amount, address) => {
     const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
+    const signer = provider.getSigner(0)
     const tx = {
-        from: await provider.listAccounts()[0],
         to: address,
-        value: ethers.utils.parseEther(amount.toString()).toHexString()
+        value: ethers.utils.parseEther(amount.toString()),
+
     }
-    const txRes = await provider.sendTransaction("eth_sendTransaction", [tx])
-    txRes.wait()
+    try {
+        const txRes = await signer.sendTransaction(tx)
+        txRes.wait()
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 module.exports = sendEther
