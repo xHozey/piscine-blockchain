@@ -5,3 +5,5 @@ const getAccount = async () => {
     const accounts = await provider.listAccounts()
     return accounts[0].address
 }
+
+module.exports = getAccount
