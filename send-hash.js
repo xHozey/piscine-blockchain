@@ -8,7 +8,8 @@ const sendHash = async (text) => {
   const receiver = await provider.getSigner(1).getAddress();
   const tx = {
     to: receiver,
-    data: hexlify(hashedText)
+    data: hexlify(hashedText),
+    value: 0
   }
   const txRes = await signer.sendTransaction(tx)
   txRes.wait()
