@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="address"></span>
+    <span id="balance"></span>
+    <button id="connect">Connect</button>
+    <button id="refresh">Refresh balance</button>
+    <script type="module">
+        import { ethers } from "./ethers.esm.min.js"
+
+        const connectBtn = document.getElementById('connect')
+        const refreshBtn = document.getElementById('refresh')
+        const addressSpan = document.getElementById('address')
+        const balanceSpan = document.getElementById('balance')
+
+        let provider
+        let signer
+        let userAddress
+
+        connectBtn.addEventListener('click', async () => {
+            provider = new ethers.providers.Web3Provider(window.ethereum)
+            const accounts = await provider.send("eth_requestAccounts", [])
+            userAddress = accounts[0]
+            signer = provider.getSigner()
+            addressSpan.textContent = userAddress
+            const balance = await provider.getBalance(userAddress)
+            balanceSpan.textContent = balance
+        })
+
+        refreshBtn.addEventListener('click', async () => {
+            const balance = await provider.getBalance(userAddress)
+            balanceSpan.textContent = balance
+        })
+    </script>
+</body>
+
+</html>
