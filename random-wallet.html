@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="address"></span>
+    <span id="balance"></span>
+    <button id="refreshBalance">refresh balance</button>
+
+    <script type="module">
+        import { ethers } from "./ethers.esm.min.js"
+        const provider = new ethers.providers.JsonRpcProvider(
+            "http://localhost:8545"
+        );
+        async function main() {
+            let walletEl = document.getElementById('address')
+            let balanceEl = document.getElementById('balance')
+            const wallet = ethers.Wallet.createRandom()
+            walletEl.textContent = wallet.address
+            const balance = await provider.getBalance(wallet.address)
+            balanceEl.textContent = ethers.utils.formatEther(balance)
+            document.getElementById('refreshBalance').addEventListener('click', refreshBalance)
+        }
+
+        main()
+
+        async function refreshBalance() {
+            let address = document.getElementById('address')
+            console.log(address.textContent)
+            const newBalance = await provider.getBalance(address.textContent)
+            document.getElementById('balance').textContent =
+                ethers.utils.formatEther(newBalance);
+
+        }
+    </script>
+
+</body>
+
+</html>
