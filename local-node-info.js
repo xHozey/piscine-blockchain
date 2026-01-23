@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers } from "./node_modules/ethers/dist/ethers.esm.min.js";
 
 const main = async () => {
   let chainId = document.getElementById("chainId");
