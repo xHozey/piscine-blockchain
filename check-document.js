@@ -5,6 +5,7 @@ async function checkDocument(text, txID) {
   const provider = new ethers.providers.JsonRpcProvider(
     "http://localhost:8545"
   );
+
   try {
     const trans = await provider.getTransaction(txID);
     const hashedText =
@@ -18,5 +19,4 @@ async function checkDocument(text, txID) {
     return 0;
   }
 }
-
 module.exports = checkDocument;
