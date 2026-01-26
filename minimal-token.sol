@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-contract MinimalToken {
+public contract MinimalToken {
     uint available_tokens;
     mapping(address => uint) balance;
 

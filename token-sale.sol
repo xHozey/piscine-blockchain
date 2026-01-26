@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-import "./minimal-token.sol" as Token;
+import {MinimalToken} from "./minimal-token.sol";
 
 contract TokenSale {
     address minimal_token;
@@ -16,7 +16,7 @@ contract TokenSale {
     function buy() public payable {
         require(msg.value >= token_price, "Not enough Ether sent");
         uint256 tokens_to_buy = msg.value wei / token_price wei;
-        Token.MinimalToken(minimal_token).transfer(msg.sender, tokens_to_buy);
+        MinimalToken(minimal_token).transfer(msg.sender, tokens_to_buy);
     }
 
     function getPrice() public view returns (uint) {
