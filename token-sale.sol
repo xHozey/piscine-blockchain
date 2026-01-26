@@ -2,7 +2,25 @@
 
 pragma solidity ^0.8.4;
 
-import {MinimalToken} from "minimal-token.sol";
+contract MinimalToken {
+    uint available_tokens;
+    mapping(address => uint) balance;
+
+    constructor(uint _available_tokens) {
+        available_tokens = _available_tokens - 200;
+        balance[msg.sender] = 200;
+    }
+
+    function balanceOf(address a) public view returns (uint) {
+        return balance[a];
+    }
+
+    function transfer(address a, uint b) public {
+        require(balance[msg.sender] >= b, "you don't have enough balance");
+        balance[a] += b;
+        balance[msg.sender] -= b;
+    }
+}
 
 contract TokenSale {
     address minimal_token;
@@ -23,7 +41,7 @@ contract TokenSale {
         return token_price;
     }
 
-    function collect() payable public {
+    function collect() public payable {
         payable(msg.sender).transfer(address(this).balance);
     }
 }
