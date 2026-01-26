@@ -6,9 +6,9 @@ contract MinimalToken {
     uint available_tokens;
     mapping(address => uint) balance;
 
-    constructor(uint _available_tokens, uint init_balance)  {
-        available_tokens = _available_tokens - init_balance;
-        balance[msg.sender] = init_balance;
+    constructor(uint _available_tokens)  {
+        available_tokens = _available_tokens - 200;
+        balance[msg.sender] = 200;
     }
 
     function balanceOf(address a) public view returns(uint) {
