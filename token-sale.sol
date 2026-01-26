@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-import {MinimalToken} from "/contract/minimal-token.sol";
+import {MinimalToken} from "./contracts/minimal-token.sol";
 
 contract TokenSale {
     address minimal_token;
