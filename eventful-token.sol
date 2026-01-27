@@ -10,7 +10,11 @@ contract EventfulToken {
         emit Minting(msg.sender, initAmount);
     }
 
-    event Transfer(address indexed sender, address indexed recepient, uint amount);
+    event Transfer(
+        address indexed sender,
+        address indexed recepient,
+        uint indexed amount
+    );
     event Minting(address recipient, uint amount);
 
     function transfer(address recepient, uint amount) public {
