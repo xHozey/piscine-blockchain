@@ -2,8 +2,6 @@
 
 pragma solidity ^0.8.4;
 
-
-
 contract EventfulToken {
     mapping(address => uint) public balanceOf;
 
@@ -12,11 +10,14 @@ contract EventfulToken {
         emit Minting(msg.sender, initAmount);
     }
 
-    event Transfer(address indexed sender, address indexed recepient, uint);
+    event Transfer(address indexed sender, address indexed recepient, uint amount);
     event Minting(address recipient, uint amount);
 
     function transfer(address recepient, uint amount) public {
-        require(balanceOf[msg.sender] >= amount, "you don't have enough balance");
+        require(
+            balanceOf[msg.sender] >= amount,
+            "you don't have enough balance"
+        );
         balanceOf[recepient] += amount;
         balanceOf[msg.sender] -= amount;
         emit Transfer(msg.sender, recepient, amount);
