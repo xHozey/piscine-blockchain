@@ -12,7 +12,7 @@ contract EventfulToken {
 
     event Transfer(
         address indexed sender,
-        address indexed recepient,
+        address indexed recipient,
         uint indexed amount
     );
     event Minting(address recipient, uint amount);
